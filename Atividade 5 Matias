@@ -1,0 +1,70 @@
+package com.example.atividade2;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            Button rollButton = findViewById(R.id.botao_roll);
+            final ImageView leftDice = findViewById(R.id.imageViewLeft);
+            final ImageView rightDice = findViewById(R.id.imageViewRight);
+
+            final int[] diceArray = {
+                    R.drawable.dice1,
+                    R.drawable.dice2,
+                    R.drawable.dice3,
+                    R.drawable.dice4,
+                    R.drawable.dice5,
+                    R.drawable.dice6
+            };
+
+            rollButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    Log.d("Dice", "Entrou no clique Botao");
+
+                    Random randomNumber = new Random();
+
+                    int number = randomNumber.nextInt(6);
+                    int number1 = randomNumber.nextInt(6);
+
+                    leftDice.setImageResource(diceArray[number]);
+                    rightDice.setImageResource(diceArray[number1]);
+
+                    int totalValue = number + number1 + 2;
+
+                    Log.d("Dice", "Número do dado esquerdo: " + (number + 1));
+                    Log.d("Dice", "Número do dado direito: " + (number1 + 1));
+                    Log.d("Dice", "Valor total: " + totalValue);
+
+                    Toast.makeText(MainActivity.this, "A Soma dos Dados é: " + totalValue, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
